@@ -683,6 +683,7 @@ Authentication state is maintained via a **stateless encrypted JWT in an HttpOnl
 - [x] Forms are keyboard-accessible and screen-reader friendly.
 - [x] No passwords or password hashes appear in logs or API responses.
 - [x] Authentication module is structured for maintainability and future extension.
+- [x] Phase 4 unit tests pass via `npm run test` (27 tests covering validation, JWT, passwords, sessions, user service, and deployment config).
 
 ---
 
@@ -723,8 +724,7 @@ The following are explicitly **not** part of Sprint 0 or the authentication modu
 - Admin user management
 - User impersonation
 - Account deletion
-- API design and database schema (deferred to future quiz sprints)
-- Automated test implementation (deferred to future sprints)
+- API design for future quiz features (deferred to Sprint 1+)
 
 ---
 
@@ -807,6 +807,7 @@ The following are explicitly **not** part of Sprint 0 or the authentication modu
 | HTTPS / TLS                              | Secure transport in production                                 | ✅ Cloudflare Workers           |
 | Application hosting (Cloudflare Workers) | Runtime for auth logic and protected routes                    | ✅ Deployed                     |
 | UI component library (shadcn/ui)         | Form and page presentation                                     | ✅ In use                       |
+| Vitest                                   | Automated unit tests for Phase 4 verification                  | ✅ Installed                    |
 
 
 No external third-party authentication provider is required. No server-side session store is required.
@@ -893,6 +894,25 @@ Sprint 0 authentication was delivered in four sequential phases. Each phase buil
 - **Production secrets** — Set `JWT_SECRET` as a Wrangler secret so JWT encryption works in the deployed environment (not bundled in source code).
 - **OpenNext dev integration** — Configured `initOpenNextCloudflareForDev()` in `next.config.ts` so D1 bindings and secrets are accessible during `npm run dev`.
 - **Manual QA** — Verified sign up, sign in, dashboard access, sign out, protected route redirects, JWT persistence across refresh, and form validation error display.
+- **Automated unit tests (Vitest)** — Added 27 unit tests covering Sprint 0 verification criteria. Run with `npm run test`.
+
+**Unit test coverage (Phase 4 verification suite)**
+
+| Test file | What it verifies |
+| --------- | ---------------- |
+| `src/lib/validation/auth-schemas.test.ts` | Sign up and sign in Zod rules: email format, password complexity, confirm-password match, field errors |
+| `src/lib/password.test.ts` | Passwords are bcrypt-hashed (never stored plain text); verify accepts correct password and rejects wrong password |
+| `src/lib/auth/jwt.test.ts` | JWT cookie settings (15m / 900s), JWE encryption, payload round-trip, tampered token rejection |
+| `src/lib/auth/session.test.ts` | `getSession`, `requireAuth`, and `redirectIfAuthenticated` behavior with mocked cookies and redirects |
+| `src/lib/services/user-service.test.ts` | User creation omits password fields, duplicate email mapping, credential verification returns null on failure |
+| `src/lib/verification/deployment.test.ts` | Wrangler D1 binding, migration SQL, `JWT_SECRET` placeholder, OpenNext dev init, npm scripts for lint/test/build/deploy |
+
+**Test commands**
+
+```bash
+npm run test        # run all unit tests once
+npm run test:watch  # run tests in watch mode
+```
 
 **Production URL:** https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev
 
