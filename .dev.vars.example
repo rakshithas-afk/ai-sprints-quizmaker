@@ -1,0 +1,5 @@
+# Load .env.development* files when running `wrangler dev`
+NEXTJS_ENV=development
+
+# Secret for JWT encryption (min 32 characters recommended)
+JWT_SECRET=
