@@ -42,7 +42,7 @@ export function SignInForm({
 	return (
 		<AuthShell
 			title="Sign In"
-			description="Welcome back. Sign in to your Quiz Maker account."
+			description="Welcome back. Sign in to your Quiz Maker Account."
 			footer={
 				<>
 					Don&apos;t have an account? <AuthLink href="/signup">Sign Up</AuthLink>
