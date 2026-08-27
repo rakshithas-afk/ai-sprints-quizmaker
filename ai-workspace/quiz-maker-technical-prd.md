@@ -13,7 +13,7 @@ Quiz Maker is a web application deployed on Cloudflare Workers. **Sprint 0 authe
 
 This Technical PRD defines the **authentication module** — the foundation that all future Quiz Maker features will depend on. It records both the original requirements and the current implemented state as of 2026-08-25.
 
-**Production URL:** https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev
+**Production URL:** [https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev](https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev)
 
 ---
 
@@ -92,35 +92,43 @@ Quiz features remain out of scope and are planned for future sprints.
 
 ### Sign Up
 
-| ID | Story | Priority |
-|----|-------|----------|
-| US-01 | As a new user, I want to create an account with my full name, email, and password so that I can access Quiz Maker. | Must have |
-| US-02 | As a new user, I want to see clear validation errors when my input is invalid so that I can fix mistakes before submitting. | Must have |
-| US-03 | As a new user, I want to be notified if my email is already registered so that I know to sign in instead. | Must have |
+
+| ID    | Story                                                                                                                              | Priority  |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| US-01 | As a new user, I want to create an account with my full name, email, and password so that I can access Quiz Maker.                 | Must have |
+| US-02 | As a new user, I want to see clear validation errors when my input is invalid so that I can fix mistakes before submitting.        | Must have |
+| US-03 | As a new user, I want to be notified if my email is already registered so that I know to sign in instead.                          | Must have |
 | US-04 | As a new user, I want to be redirected to the Sign In page after successful registration so that I can log in with my new account. | Must have |
+
 
 ### Sign In
 
-| ID | Story | Priority |
-|----|-------|----------|
-| US-05 | As a registered user, I want to sign in with my email and password so that I can access my account. | Must have |
-| US-06 | As a registered user, I want to see a meaningful error when my credentials are wrong so that I know sign in failed. | Must have |
+
+| ID    | Story                                                                                                                                       | Priority  |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| US-05 | As a registered user, I want to sign in with my email and password so that I can access my account.                                         | Must have |
+| US-06 | As a registered user, I want to see a meaningful error when my credentials are wrong so that I know sign in failed.                         | Must have |
 | US-07 | As a signed-in user, I want to stay logged in for up to 15 minutes so that I can use the app without re-entering credentials on every page. | Must have |
-| US-08 | As a signed-in user, I want to be redirected to the Dashboard with a welcome message after login so that I know I am signed in. | Must have |
+| US-08 | As a signed-in user, I want to be redirected to the Dashboard with a welcome message after login so that I know I am signed in.             | Must have |
+
 
 ### Logout and session
 
-| ID | Story | Priority |
-|----|-------|----------|
-| US-09 | As a signed-in user, I want to sign out so that my JWT session ends on shared or public devices. | Must have |
+
+| ID    | Story                                                                                                      | Priority  |
+| ----- | ---------------------------------------------------------------------------------------------------------- | --------- |
+| US-09 | As a signed-in user, I want to sign out so that my JWT session ends on shared or public devices.           | Must have |
 | US-10 | As a signed-in user, I want to be redirected to `/signin` after sign out so that I have a clear next step. | Must have |
+
 
 ### Protected routes
 
-| ID | Story | Priority |
-|----|-------|----------|
-| US-11 | As a signed-in user, I want to access protected pages such as the Dashboard without being asked to sign in again. | Must have |
+
+| ID    | Story                                                                                                                                  | Priority  |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| US-11 | As a signed-in user, I want to access protected pages such as the Dashboard without being asked to sign in again.                      | Must have |
 | US-12 | As an unauthenticated user, I want to be redirected to Sign In when I try to access a protected page so that I can authenticate first. | Must have |
+
 
 ---
 
@@ -150,13 +158,15 @@ Upon successful authentication, the system shall issue an encrypted JWT in an Ht
 
 The system shall maintain authenticated state using a **stateless encrypted JWT** stored in an HttpOnly cookie. There is **no server-side session store** and **no refresh token**.
 
-| Setting | Value |
-|---------|-------|
-| JWT expiration | **15 minutes** (fixed, from sign-in time) |
-| Cookie expiration | **15 minutes** (same as JWT) |
-| Refresh token | **None** |
-| Remember me | **Not supported** |
-| Expiry type | **Fixed** — does not extend on user activity |
+
+| Setting           | Value                                        |
+| ----------------- | -------------------------------------------- |
+| JWT expiration    | **15 minutes** (fixed, from sign-in time)    |
+| Cookie expiration | **15 minutes** (same as JWT)                 |
+| Refresh token     | **None**                                     |
+| Remember me       | **Not supported**                            |
+| Expiry type       | **Fixed** — does not extend on user activity |
+
 
 The JWT shall persist across page navigation and full page reloads within the 15-minute window. After expiry, the user must sign in again.
 
@@ -175,7 +185,7 @@ The system shall restrict access to protected pages so that only users with a **
 
 Protected pages for this sprint include at minimum:
 
-- **`/dashboard`** — authenticated landing page with welcome message, Sign Out button, and placeholder text for future quiz features.
+- `/dashboard` — authenticated landing page with welcome message, Sign Out button, and placeholder text for future quiz features.
 
 **On every protected request**, the system shall:
 
@@ -262,12 +272,14 @@ The system shall provide appropriate success feedback or navigation after succes
 
 **Input fields**
 
-| Field | Control type | Required |
-|-------|--------------|----------|
-| Full Name | Text input | Yes |
-| Email Address | Email input | Yes |
-| Password | Password input (masked) | Yes |
-| Confirm Password | Password input (masked) | Yes |
+
+| Field            | Control type            | Required |
+| ---------------- | ----------------------- | -------- |
+| Full Name        | Text input              | Yes      |
+| Email Address    | Email input             | Yes      |
+| Password         | Password input (masked) | Yes      |
+| Confirm Password | Password input (masked) | Yes      |
+
 
 **Actions**
 
@@ -288,10 +300,12 @@ The system shall provide appropriate success feedback or navigation after succes
 
 **Input fields**
 
-| Field | Control type | Required |
-|-------|--------------|----------|
-| Email Address | Email input | Yes |
-| Password | Password input (masked) | Yes |
+
+| Field         | Control type            | Required |
+| ------------- | ----------------------- | -------- |
+| Email Address | Email input             | Yes      |
+| Password      | Password input (masked) | Yes      |
+
 
 **Actions**
 
@@ -324,19 +338,23 @@ The system shall provide appropriate success feedback or navigation after succes
 
 #### Sign Up
 
-| Field | Rules |
-|-------|-------|
-| Full Name | Required. Must not be empty or whitespace only. Reasonable maximum length (recommended: 100 characters). |
-| Email Address | Required. Must be a valid email format. Must be unique across all registered users (case-insensitive comparison recommended). |
-| Password | Required. Minimum 8 characters. Must contain at least one uppercase letter, one lowercase letter, one number, and one special character. |
-| Confirm Password | Required. Must exactly match the Password field. |
+
+| Field            | Rules                                                                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Full Name        | Required. Must not be empty or whitespace only. Reasonable maximum length (recommended: 100 characters).                                 |
+| Email Address    | Required. Must be a valid email format. Must be unique across all registered users (case-insensitive comparison recommended).            |
+| Password         | Required. Minimum 8 characters. Must contain at least one uppercase letter, one lowercase letter, one number, and one special character. |
+| Confirm Password | Required. Must exactly match the Password field.                                                                                         |
+
 
 #### Sign In
 
-| Field | Rules |
-|-------|-------|
+
+| Field         | Rules                                   |
+| ------------- | --------------------------------------- |
 | Email Address | Required. Must be a valid email format. |
-| Password | Required. Must not be empty. |
+| Password      | Required. Must not be empty.            |
+
 
 Validation must run on the server for all rules above. Client-side validation may provide immediate feedback but must mirror server rules.
 
@@ -348,32 +366,36 @@ Error messages must be written in plain, professional English. They must be spec
 
 #### Sign Up — field validation
 
-| Condition | Error message (or equivalent) |
-|-----------|-------------------------------|
-| Full Name empty | "Full name is required." |
-| Email empty | "Email address is required." |
-| Email invalid format | "Please enter a valid email address." |
-| Email already registered | "An account with this email already exists. Please sign in." |
-| Password empty | "Password is required." |
-| Password too short | "Password must be at least 8 characters." |
-| Password missing uppercase | "Password must contain at least one uppercase letter." |
-| Password missing lowercase | "Password must contain at least one lowercase letter." |
-| Password missing number | "Password must contain at least one number." |
-| Password missing special character | "Password must contain at least one special character." |
-| Confirm Password empty | "Please confirm your password." |
-| Confirm Password mismatch | "Passwords do not match." |
-| Multiple validation errors | Display all applicable field errors simultaneously. |
-| Unexpected server failure | "Something went wrong. Please try again later." |
+
+| Condition                          | Error message (or equivalent)                                |
+| ---------------------------------- | ------------------------------------------------------------ |
+| Full Name empty                    | "Full name is required."                                     |
+| Email empty                        | "Email address is required."                                 |
+| Email invalid format               | "Please enter a valid email address."                        |
+| Email already registered           | "An account with this email already exists. Please sign in." |
+| Password empty                     | "Password is required."                                      |
+| Password too short                 | "Password must be at least 8 characters."                    |
+| Password missing uppercase         | "Password must contain at least one uppercase letter."       |
+| Password missing lowercase         | "Password must contain at least one lowercase letter."       |
+| Password missing number            | "Password must contain at least one number."                 |
+| Password missing special character | "Password must contain at least one special character."      |
+| Confirm Password empty             | "Please confirm your password."                              |
+| Confirm Password mismatch          | "Passwords do not match."                                    |
+| Multiple validation errors         | Display all applicable field errors simultaneously.          |
+| Unexpected server failure          | "Something went wrong. Please try again later."              |
+
 
 #### Sign In
 
-| Condition | Error message (or equivalent) |
-|-----------|-------------------------------|
-| Email empty | "Email address is required." |
-| Email invalid format | "Please enter a valid email address." |
-| Password empty | "Password is required." |
-| Invalid credentials (wrong email or password) | "Invalid email or password." |
-| Unexpected server failure | "Something went wrong. Please try again later." |
+
+| Condition                                     | Error message (or equivalent)                   |
+| --------------------------------------------- | ----------------------------------------------- |
+| Email empty                                   | "Email address is required."                    |
+| Email invalid format                          | "Please enter a valid email address."           |
+| Password empty                                | "Password is required."                         |
+| Invalid credentials (wrong email or password) | "Invalid email or password."                    |
+| Unexpected server failure                     | "Something went wrong. Please try again later." |
+
 
 **Security note:** The invalid credentials message must be the same whether the email does not exist or the password is wrong, to reduce user enumeration.
 
@@ -381,12 +403,14 @@ Error messages must be written in plain, professional English. They must be spec
 
 ### Success messages and navigation
 
-| Event | Behavior |
-|-------|----------|
-| Successful Sign Up | Redirect to `/signin`. Optional brief success message on Sign In page (e.g., "Account created successfully. Please sign in."). No JWT issued. |
-| Successful Sign In | Redirect to `/dashboard` with welcome message showing user's full name (e.g., "Welcome, {Full Name}!"). |
-| Successful Sign Out | Clear JWT cookie via Server Action; redirect to `/signin?signedOut=1` with empty form. |
-| JWT expired on protected page | Redirect to `/signin`. |
+
+| Event                         | Behavior                                                                                                                                      |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Successful Sign Up            | Redirect to `/signin`. Optional brief success message on Sign In page (e.g., "Account created successfully. Please sign in."). No JWT issued. |
+| Successful Sign In            | Redirect to `/dashboard` with welcome message showing user's full name (e.g., "Welcome, {Full Name}!").                                       |
+| Successful Sign Out           | Clear JWT cookie via Server Action; redirect to `/signin?signedOut=1` with empty form.                                                        |
+| JWT expired on protected page | Redirect to `/signin`.                                                                                                                        |
+
 
 ---
 
@@ -470,38 +494,44 @@ This section defines the agreed authentication mechanism for Quiz Maker. It repl
 
 ### Architecture: stateless JWT in encrypted cookie
 
-| Decision | Value |
-|----------|-------|
-| Token type | Encrypted JWT (JWE) |
-| Storage | HttpOnly, Secure, SameSite=Lax cookie |
-| Server-side session store | **None** — stateless |
-| Browser sessionStorage / localStorage | **Not used** for auth tokens |
-| Refresh token | **None** |
-| Remember me | **Not supported** |
-| JWT expiration | **15 minutes** (fixed from sign-in) |
-| Cookie expiration | **15 minutes** (must match JWT `exp`) |
-| Expiry behavior | **Fixed** — does not extend on activity |
+
+| Decision                              | Value                                   |
+| ------------------------------------- | --------------------------------------- |
+| Token type                            | Encrypted JWT (JWE)                     |
+| Storage                               | HttpOnly, Secure, SameSite=Lax cookie   |
+| Server-side session store             | **None** — stateless                    |
+| Browser sessionStorage / localStorage | **Not used** for auth tokens            |
+| Refresh token                         | **None**                                |
+| Remember me                           | **Not supported**                       |
+| JWT expiration                        | **15 minutes** (fixed from sign-in)     |
+| Cookie expiration                     | **15 minutes** (must match JWT `exp`)   |
+| Expiry behavior                       | **Fixed** — does not extend on activity |
+
 
 ### Cookie specification
 
-| Attribute | Value |
-|-----------|-------|
-| Name | `auth_token` |
-| HttpOnly | `true` |
-| Secure | `true` in production; `false` acceptable for local HTTP dev |
-| SameSite | `Lax` |
-| Path | `/` |
-| Max-Age | `900` seconds (15 minutes) |
+
+| Attribute | Value                                                       |
+| --------- | ----------------------------------------------------------- |
+| Name      | `auth_token`                                                |
+| HttpOnly  | `true`                                                      |
+| Secure    | `true` in production; `false` acceptable for local HTTP dev |
+| SameSite  | `Lax`                                                       |
+| Path      | `/`                                                         |
+| Max-Age   | `900` seconds (15 minutes)                                  |
+
 
 ### JWT payload (minimum claims)
 
-| Claim | Purpose |
-|-------|---------|
-| `sub` | User ID |
-| `email` | User email |
-| `name` | Full name (for Dashboard welcome message) |
-| `iat` | Issued at |
-| `exp` | Expiration (15 minutes from `iat`) |
+
+| Claim   | Purpose                                   |
+| ------- | ----------------------------------------- |
+| `sub`   | User ID                                   |
+| `email` | User email                                |
+| `name`  | Full name (for Dashboard welcome message) |
+| `iat`   | Issued at                                 |
+| `exp`   | Expiration (15 minutes from `iat`)        |
+
 
 The JWT must be **encrypted (JWE)** so claims are not readable in plaintext. A signing key / encryption secret (`JWT_SECRET`) must be stored in environment secrets (`.dev.vars` locally, `wrangler secret put` in production).
 
@@ -526,66 +556,76 @@ On **every protected request**:
 
 ### Sign Up
 
-| Requirement | Detail |
-|-------------|--------|
-| Fields | Full Name, Email Address, Password, Confirm Password |
-| All fields required | Yes |
-| Email uniqueness | Yes — duplicate emails rejected |
-| Email format | Valid email format enforced |
-| Password complexity | Minimum 8 characters; at least one uppercase, one lowercase, one number, one special character |
-| Confirm Password | Must match Password |
-| Post-registration redirect | `/signin` |
-| JWT issued on registration | No |
-| Auto sign-in after registration | No |
+
+| Requirement                     | Detail                                                                                         |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Fields                          | Full Name, Email Address, Password, Confirm Password                                           |
+| All fields required             | Yes                                                                                            |
+| Email uniqueness                | Yes — duplicate emails rejected                                                                |
+| Email format                    | Valid email format enforced                                                                    |
+| Password complexity             | Minimum 8 characters; at least one uppercase, one lowercase, one number, one special character |
+| Confirm Password                | Must match Password                                                                            |
+| Post-registration redirect      | `/signin`                                                                                      |
+| JWT issued on registration      | No                                                                                             |
+| Auto sign-in after registration | No                                                                                             |
+
 
 ### Sign In
 
-| Requirement | Detail |
-|-------------|--------|
-| Fields | Email Address, Password |
-| Credential validation | Yes — verify against stored user record |
-| Invalid login messaging | Generic: "Invalid email or password" |
-| Post-login redirect | `/dashboard` with welcome message |
-| JWT issued on login | Yes — encrypted JWT in HttpOnly cookie |
-| JWT / cookie expiration | 15 minutes, fixed |
-| Refresh token | No |
-| Remember me | No |
+
+| Requirement             | Detail                                  |
+| ----------------------- | --------------------------------------- |
+| Fields                  | Email Address, Password                 |
+| Credential validation   | Yes — verify against stored user record |
+| Invalid login messaging | Generic: "Invalid email or password"    |
+| Post-login redirect     | `/dashboard` with welcome message       |
+| JWT issued on login     | Yes — encrypted JWT in HttpOnly cookie  |
+| JWT / cookie expiration | 15 minutes, fixed                       |
+| Refresh token           | No                                      |
+| Remember me             | No                                      |
+
 
 ### Sign Out
 
-| Requirement | Detail |
-|-------------|--------|
-| JWT cookie cleared | Yes — on Sign Out |
-| Post-sign-out redirect | `/signin` |
+
+| Requirement                  | Detail                 |
+| ---------------------------- | ---------------------- |
+| JWT cookie cleared           | Yes — on Sign Out      |
+| Post-sign-out redirect       | `/signin`              |
 | Server-side token revocation | No (cookie clear only) |
+
 
 ### Protected routes
 
-| Requirement | Detail |
-|-------------|--------|
-| Authenticated access only | Yes — valid JWT required for `/dashboard` and future protected pages |
-| Unauthenticated / expired redirect | `/signin` (cookie cleared) |
-| JWT verification | Required on **every** protected request |
+
+| Requirement                        | Detail                                                               |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| Authenticated access only          | Yes — valid JWT required for `/dashboard` and future protected pages |
+| Unauthenticated / expired redirect | `/signin` (cookie cleared)                                           |
+| JWT verification                   | Required on **every** protected request                              |
+
 
 ---
 
 ## Security Requirements
 
-| ID | Requirement |
-|----|-------------|
-| SEC-01 | Passwords must be hashed before storage using bcrypt (`bcryptjs`, 10 rounds). |
-| SEC-02 | Plain-text passwords must never be stored, logged, or transmitted in responses. |
-| SEC-03 | Password hashes must never be exposed through APIs or UI. |
-| SEC-04 | Sign In errors must use a generic message that does not reveal whether an email is registered. |
-| SEC-05 | JWT cookie must be cleared immediately on sign out. |
-| SEC-06 | JWT and cookie expiration must be **15 minutes**, fixed from sign-in time. No refresh token. No sliding expiration. |
+
+| ID     | Requirement                                                                                                                                               |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SEC-01 | Passwords must be hashed before storage using bcrypt (`bcryptjs`, 10 rounds).                                                                             |
+| SEC-02 | Plain-text passwords must never be stored, logged, or transmitted in responses.                                                                           |
+| SEC-03 | Password hashes must never be exposed through APIs or UI.                                                                                                 |
+| SEC-04 | Sign In errors must use a generic message that does not reveal whether an email is registered.                                                            |
+| SEC-05 | JWT cookie must be cleared immediately on sign out.                                                                                                       |
+| SEC-06 | JWT and cookie expiration must be **15 minutes**, fixed from sign-in time. No refresh token. No sliding expiration.                                       |
 | SEC-07 | JWT must be stored in an **HttpOnly, Secure, SameSite=Lax** cookie. Must not be stored in `sessionStorage`, `localStorage`, or accessible via JavaScript. |
-| SEC-08 | JWT must be **encrypted (JWE)**, not merely signed, so payload claims are not readable in plaintext. |
-| SEC-09 | All authentication forms must be processed server-side; client-side validation alone is insufficient. |
-| SEC-10 | On every protected request, verify JWT. If expired or invalid, redirect to `/signin`. Cookie clearing happens on sign-out only. |
-| SEC-11 | Rate limiting or brute-force protection should be considered during implementation (may be deferred to a hardening sprint). |
-| SEC-12 | HTTPS must be enforced in production environments. |
-| SEC-13 | `JWT_SECRET` (or equivalent) must be stored in environment secrets, never committed to the repository. |
+| SEC-08 | JWT must be **encrypted (JWE)**, not merely signed, so payload claims are not readable in plaintext.                                                      |
+| SEC-09 | All authentication forms must be processed server-side; client-side validation alone is insufficient.                                                     |
+| SEC-10 | On every protected request, verify JWT. If expired or invalid, redirect to `/signin`. Cookie clearing happens on sign-out only.                           |
+| SEC-11 | Rate limiting or brute-force protection should be considered during implementation (may be deferred to a hardening sprint).                               |
+| SEC-12 | HTTPS must be enforced in production environments.                                                                                                        |
+| SEC-13 | `JWT_SECRET` (or equivalent) must be stored in environment secrets, never committed to the repository.                                                    |
+
 
 ### JWT authentication — design decision (confirmed)
 
@@ -690,18 +730,20 @@ The following are explicitly **not** part of Sprint 0 or the authentication modu
 
 ## Future Enhancements
 
-| Enhancement | Description |
-|-------------|-------------|
-| Forgot password / reset flow | Allow users to recover access via email link |
-| Email verification | Confirm email ownership before full account activation |
-| Refresh token / silent renewal | Extend sessions without re-login (explicitly rejected for v1) |
-| OAuth / social login | Sign in with Google, Microsoft, or other providers |
-| Multi-factor authentication | Additional verification step for high-security accounts |
-| Role-based access | Separate roles for quiz creators, students, and administrators |
-| Profile management | Allow users to update name, email, and password |
-| Session management UI | View and revoke active sessions |
-| Rate limiting and CAPTCHA | Protect against brute-force and automated abuse |
-| Audit logging | Track sign in, sign out, and failed login events |
+
+| Enhancement                    | Description                                                    |
+| ------------------------------ | -------------------------------------------------------------- |
+| Forgot password / reset flow   | Allow users to recover access via email link                   |
+| Email verification             | Confirm email ownership before full account activation         |
+| Refresh token / silent renewal | Extend sessions without re-login (explicitly rejected for v1)  |
+| OAuth / social login           | Sign in with Google, Microsoft, or other providers             |
+| Multi-factor authentication    | Additional verification step for high-security accounts        |
+| Role-based access              | Separate roles for quiz creators, students, and administrators |
+| Profile management             | Allow users to update name, email, and password                |
+| Session management UI          | View and revoke active sessions                                |
+| Rate limiting and CAPTCHA      | Protect against brute-force and automated abuse                |
+| Audit logging                  | Track sign in, sign out, and failed login events               |
+
 
 ---
 
@@ -709,55 +751,63 @@ The following are explicitly **not** part of Sprint 0 or the authentication modu
 
 ### Risks
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| 15-minute JWT expiry | Users must re-login frequently | Accepted product decision; refresh tokens explicitly out of scope |
-| No JWT revocation blocklist | Stolen JWT valid until expiry (max 15 min) | Short TTL limits exposure; blocklist deferred to future hardening |
-| Password hashing on edge runtime | Some algorithms may have CPU constraints on Cloudflare Workers | **Mitigated — bcrypt (10 rounds) validated on Workers runtime** |
-| User enumeration via Sign Up | Duplicate email error reveals registered emails | Acceptable tradeoff for registration UX; Sign In uses generic errors |
-| Brute-force login attacks | Account compromise | Plan rate limiting in implementation or hardening sprint |
-| Scope creep into quiz features | Sprint delays | Strictly enforce Out of Scope; Dashboard remains placeholder only |
+
+| Risk                             | Impact                                                         | Mitigation                                                           |
+| -------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| 15-minute JWT expiry             | Users must re-login frequently                                 | Accepted product decision; refresh tokens explicitly out of scope    |
+| No JWT revocation blocklist      | Stolen JWT valid until expiry (max 15 min)                     | Short TTL limits exposure; blocklist deferred to future hardening    |
+| Password hashing on edge runtime | Some algorithms may have CPU constraints on Cloudflare Workers | **Mitigated — bcrypt (10 rounds) validated on Workers runtime**      |
+| User enumeration via Sign Up     | Duplicate email error reveals registered emails                | Acceptable tradeoff for registration UX; Sign In uses generic errors |
+| Brute-force login attacks        | Account compromise                                             | Plan rate limiting in implementation or hardening sprint             |
+| Scope creep into quiz features   | Sprint delays                                                  | Strictly enforce Out of Scope; Dashboard remains placeholder only    |
+
 
 ### Open questions
 
-| # | Question | Status |
-|---|----------|--------|
-| OQ-01 | JWT / cookie lifetime | **Closed — 15 minutes, fixed, no refresh** |
-| OQ-02 | Return URL after login | **Closed — default `/dashboard` with welcome message** |
-| OQ-03 | Password hashing algorithm on Workers | **Closed — bcrypt (bcryptjs, 10 rounds)** |
-| OQ-04 | Remember me | **Closed — not supported** |
-| OQ-05 | Full Name vs First/Last split | Open — single Full Name field for now |
-| OQ-06 | Rate limiting strategy | Open — decide during hardening sprint |
-| OQ-07 | JWT encryption library on Cloudflare Workers | **Closed — `jose` (EncryptJWT / jwtDecrypt, dir/A256GCM)** |
+
+| #     | Question                                     | Status                                                         |
+| ----- | -------------------------------------------- | -------------------------------------------------------------- |
+| OQ-01 | JWT / cookie lifetime                        | **Closed — 15 minutes, fixed, no refresh**                     |
+| OQ-02 | Return URL after login                       | **Closed — default** `/dashboard` **with welcome message**     |
+| OQ-03 | Password hashing algorithm on Workers        | **Closed — bcrypt (bcryptjs, 10 rounds)**                      |
+| OQ-04 | Remember me                                  | **Closed — not supported**                                     |
+| OQ-05 | Full Name vs First/Last split                | Open — single Full Name field for now                          |
+| OQ-06 | Rate limiting strategy                       | Open — decide during hardening sprint                          |
+| OQ-07 | JWT encryption library on Cloudflare Workers | **Closed —** `jose` **(EncryptJWT / jwtDecrypt, dir/A256GCM)** |
+
 
 ---
 
 ## Success Metrics
 
-| Metric | Target | How measured |
-|--------|--------|--------------|
-| Registration completion rate | Users who submit valid Sign Up reach Sign In redirect | Manual / analytics on Sign Up funnel |
-| Sign In success rate | Valid credentials result in `/dashboard` with welcome message | Test cases + manual QA |
-| JWT persistence | Valid JWT survives refresh and navigation within 15 minutes | Manual / automated test |
-| JWT expiry | After 15 minutes, protected access redirects to `/signin` | Manual / automated test |
-| Protected route enforcement | 100% of invalid/missing JWT access attempts redirect to `/signin` | Test cases |
-| Security compliance | Zero plain-text passwords in storage or logs | Security review / audit checklist |
-| Accessibility | Sign Up and Sign In pass basic keyboard and screen reader checks | Manual accessibility review |
+
+| Metric                       | Target                                                            | How measured                         |
+| ---------------------------- | ----------------------------------------------------------------- | ------------------------------------ |
+| Registration completion rate | Users who submit valid Sign Up reach Sign In redirect             | Manual / analytics on Sign Up funnel |
+| Sign In success rate         | Valid credentials result in `/dashboard` with welcome message     | Test cases + manual QA               |
+| JWT persistence              | Valid JWT survives refresh and navigation within 15 minutes       | Manual / automated test              |
+| JWT expiry                   | After 15 minutes, protected access redirects to `/signin`         | Manual / automated test              |
+| Protected route enforcement  | 100% of invalid/missing JWT access attempts redirect to `/signin` | Test cases                           |
+| Security compliance          | Zero plain-text passwords in storage or logs                      | Security review / audit checklist    |
+| Accessibility                | Sign Up and Sign In pass basic keyboard and screen reader checks  | Manual accessibility review          |
+
 
 ---
 
 ## Dependencies
 
-| Dependency | Purpose | Status |
-|------------|---------|--------|
-| Cloudflare D1 (`quizmaker-db`) | Store registered user records and password hashes | ✅ Provisioned (local + remote) |
-| `jose` | Generate, encrypt, and verify JWT tokens (JWE) | ✅ Installed |
-| `bcryptjs` | Password hashing and verification | ✅ Installed |
-| `zod` | Server-side input validation | ✅ Installed |
-| `JWT_SECRET` | Secret key for JWT encryption (`.dev.vars` / Wrangler secrets) | ✅ Configured |
-| HTTPS / TLS | Secure transport in production | ✅ Cloudflare Workers |
-| Application hosting (Cloudflare Workers) | Runtime for auth logic and protected routes | ✅ Deployed |
-| UI component library (shadcn/ui) | Form and page presentation | ✅ In use |
+
+| Dependency                               | Purpose                                                        | Status                         |
+| ---------------------------------------- | -------------------------------------------------------------- | ------------------------------ |
+| Cloudflare D1 (`quizmaker-db`)           | Store registered user records and password hashes              | ✅ Provisioned (local + remote) |
+| `jose`                                   | Generate, encrypt, and verify JWT tokens (JWE)                 | ✅ Installed                    |
+| `bcryptjs`                               | Password hashing and verification                              | ✅ Installed                    |
+| `zod`                                    | Server-side input validation                                   | ✅ Installed                    |
+| `JWT_SECRET`                             | Secret key for JWT encryption (`.dev.vars` / Wrangler secrets) | ✅ Configured                   |
+| HTTPS / TLS                              | Secure transport in production                                 | ✅ Cloudflare Workers           |
+| Application hosting (Cloudflare Workers) | Runtime for auth logic and protected routes                    | ✅ Deployed                     |
+| UI component library (shadcn/ui)         | Form and page presentation                                     | ✅ In use                       |
+
 
 No external third-party authentication provider is required. No server-side session store is required.
 
@@ -765,21 +815,90 @@ No external third-party authentication provider is required. No server-side sess
 
 ## Implementation Phases
 
+Sprint 0 authentication was delivered in four sequential phases. Each phase built on the previous one: infrastructure first, then business logic, then user-facing pages, and finally verification and production deployment. All four phases are complete as of 2026-08-25.
+
+---
+
 ### Phase 1: Foundation — ✅ COMPLETE
 
-**Delivered:** D1 database binding, `users` table migration, password hashing (`bcryptjs`), JWT module (`jose`), `JWT_SECRET` configuration.
+**Objective:** Establish the persistence, cryptography, and runtime infrastructure required before any authentication flows could be built. This phase answered the question: *where do users live, and how are passwords and tokens handled securely on Cloudflare Workers?*
+
+**What was built**
+
+- **Cloudflare D1 database binding** — Added `quizmaker-db` to `wrangler.jsonc` with binding name `DB`, enabling the Worker to read and write SQLite data at the edge. Regenerated `cloudflare-env.d.ts` so TypeScript knows about the `DB` binding.
+- **`users` table migration** — Created `migrations/0001_create_users.sql` defining the `users` table (`id`, `full_name`, `email`, `password_hash`, `created_at`, `updated_at`) and a unique index on email. Applied locally for development and remotely for production.
+- **Database access layer** — Implemented `src/lib/db.ts` with `getDb()` using `getCloudflareContext()` from OpenNext, plus a Wrangler platform-proxy fallback for local `next dev` when the D1 binding is not yet available in server actions.
+- **Password hashing module** — Implemented `src/lib/password.ts` using `bcryptjs` with 10 salt rounds. Provides `hashPassword()` for registration and `verifyPassword()` for login. Plain-text passwords never touch the database.
+- **JWT module** — Implemented `src/lib/auth/jwt.ts` using `jose` with JWE encryption (`dir` / `A256GCM`). Token lifetime is 15 minutes. Payload includes user ID (`sub`), email, and full name for the dashboard welcome message.
+- **Secret configuration** — Added `JWT_SECRET` to `.dev.vars.example` for local development. Documented that production values are set via `wrangler secret put JWT_SECRET`.
+
+**Key files:** `wrangler.jsonc`, `migrations/0001_create_users.sql`, `src/lib/db.ts`, `src/lib/password.ts`, `src/lib/auth/jwt.ts`, `src/lib/auth/cookies.ts`
+
+**Outcome:** The project had a working D1 schema, secure password storage, and encrypted JWT infrastructure ready for authentication logic to be wired in.
+
+---
 
 ### Phase 2: Authentication logic — ✅ COMPLETE
 
-**Delivered:** Server Actions for sign up, sign in, sign out; Zod validation; credential verification; JWT issuance and verification.
+**Objective:** Implement the server-side business rules for registration, login, logout, and session verification. This phase answered the question: *what happens when a user submits a form, and how does the system decide if they are authenticated?*
+
+**What was built**
+
+- **User service layer** — Implemented `src/lib/services/user-service.ts` with D1 prepared statements for `createUser`, `getUserByEmail`, `verifyCredentials`, `getUserById`, `updateUser`, and `deleteUser`. All queries use numbered placeholders (`?1`, `?2`) per D1 conventions.
+- **Zod validation schemas** — Implemented `src/lib/validation/auth-schemas.ts` with `signUpSchema` and `signInSchema` enforcing all field rules from the PRD (email format, password complexity, confirm-password match, full name length). Includes `zodFieldErrors()` helper to map validation errors to form field names.
+- **Server Actions** — Implemented `src/lib/actions/auth-actions.ts`:
+  - `signUpAction` — validates input, creates user, handles duplicate email, redirects to `/signin?registered=1` (no auto sign-in).
+  - `signInAction` — validates credentials, issues encrypted JWT cookie, redirects to `/dashboard`.
+  - `signOutAction` — clears auth cookie, redirects to `/signin?signedOut=1`.
+- **Session helpers** — Implemented `src/lib/auth/session.ts` with `getSession()`, `requireAuth()`, and `redirectIfAuthenticated()` for reading and enforcing JWT state across pages.
+- **Cookie management** — Implemented `src/lib/auth/cookies.ts` for setting, reading, and clearing the `auth_token` HttpOnly cookie with `Secure` (production) and `SameSite=Lax`.
+- **Custom errors** — Implemented `src/lib/errors.ts` with `DuplicateEmailError` for clean duplicate-email handling during registration.
+
+**Key files:** `src/lib/services/user-service.ts`, `src/lib/validation/auth-schemas.ts`, `src/lib/actions/auth-actions.ts`, `src/lib/auth/session.ts`, `src/lib/auth/cookies.ts`, `src/lib/errors.ts`
+
+**Outcome:** All authentication business rules were implemented on the server. Forms could be connected in Phase 3 without changing core logic.
+
+---
 
 ### Phase 3: UI and protected routes — ✅ COMPLETE
 
-**Delivered:** `/signup`, `/signin`, `/dashboard`, home page with auth links; Dashboard welcome message and Sign Out; redirect guards.
+**Objective:** Build the user-facing pages and enforce access control so authenticated and unauthenticated users see the correct screens. This phase answered the question: *what does the user see, and which pages require a valid session?*
+
+**What was built**
+
+- **Home page (`/`)** — Updated `src/app/page.tsx` to show Sign In / Sign Up links for guests and a Go to Dashboard link for signed-in users. Uses `<main>` landmark and `<nav aria-label="Primary">` for accessibility.
+- **Sign Up page (`/signup`)** — Server page with `redirectIfAuthenticated()` guard. Renders `SignUpForm` client component with Server Action form, field-level Zod errors, loading state on submit, and link to sign in.
+- **Sign In page (`/signin`)** — Server page supporting `?registered=1` and `?signedOut=1` query params. Renders `SignInForm` with autofill prevention after sign-out, status messages, and generic credential error display.
+- **Dashboard page (`/dashboard`)** — Protected server page using `requireAuth()`. Shows welcome message with user's full name, placeholder text for future quiz features, and Sign Out button.
+- **Auth UI components** — Built `auth-shell.tsx` (shared card layout), `sign-in-form.tsx`, `sign-up-form.tsx`, and `sign-out-button.tsx` using shadcn/ui `Field`, `Input`, `Button`, and `Card` components.
+- **Redirect guards** — Authenticated users visiting `/signin` or `/signup` are redirected to `/dashboard`. Unauthenticated users visiting `/dashboard` are redirected to `/signin`.
+- **Accessibility improvements** — Skip-to-main-content link in root layout, ARIA labels on forms, live regions for status/error messages, focus-visible styles on auth links, semantic `<main>` / `<footer>` landmarks.
+
+**Key files:** `src/app/page.tsx`, `src/app/signup/page.tsx`, `src/app/signin/page.tsx`, `src/app/dashboard/page.tsx`, `src/app/layout.tsx`, `src/components/auth/*`
+
+**Outcome:** The full authentication user journey was usable end-to-end in local development: register → sign in → dashboard → sign out.
+
+---
 
 ### Phase 4: Verification and deployment — ✅ COMPLETE
 
-**Delivered:** Lint and build pass; remote D1 migration applied; production deployment to Cloudflare Workers; `JWT_SECRET` set as Wrangler secret.
+**Objective:** Validate that the implementation meets PRD acceptance criteria, apply the database schema to production, and deploy the application to Cloudflare Workers so real users can access it. This phase answered the question: *does it work in production, not just locally?*
+
+**What was done**
+
+- **Lint and build verification** — Ran `npm run lint` and `npm run build` successfully. TypeScript strict mode passes. No plain-text passwords or hashes in API responses.
+- **Local D1 migration** — Applied `0001_create_users.sql` to the local D1 instance via `wrangler d1 migrations apply quizmaker-db --local` for development testing.
+- **Remote D1 migration** — Applied the same migration to the production Cloudflare D1 database via `wrangler d1 migrations apply quizmaker-db --remote`. Confirmed `users` table exists in Cloudflare D1 Studio.
+- **Production deployment** — Built with OpenNext and deployed to Cloudflare Workers via `npm run deploy`. Registered workers.dev subdomain `rakshitha-quizmaker-rs`.
+- **Production secrets** — Set `JWT_SECRET` as a Wrangler secret so JWT encryption works in the deployed environment (not bundled in source code).
+- **OpenNext dev integration** — Configured `initOpenNextCloudflareForDev()` in `next.config.ts` so D1 bindings and secrets are accessible during `npm run dev`.
+- **Manual QA** — Verified sign up, sign in, dashboard access, sign out, protected route redirects, JWT persistence across refresh, and form validation error display.
+
+**Production URL:** https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev
+
+**Key configuration:** `wrangler.jsonc`, `next.config.ts`, `.dev.vars.example`, `open-next.config.ts`
+
+**Outcome:** Quiz Maker authentication is live in production on Cloudflare Workers with a remote D1 database, encrypted JWT sessions, and all Sprint 0 acceptance criteria met.
 
 ---
 
@@ -803,25 +922,29 @@ When extending Quiz Maker beyond authentication:
 
 ### Routes
 
-| Route | Type | Description |
-|-------|------|-------------|
-| `/` | Dynamic | Home page; links to sign in, sign up, or dashboard based on session |
-| `/signup` | Dynamic | Registration form; redirects authenticated users to dashboard |
-| `/signin` | Dynamic | Login form; supports `?registered=1` and `?signedOut=1` query params |
-| `/dashboard` | Protected | Authenticated landing page with welcome message and sign out |
+
+| Route        | Type      | Description                                                          |
+| ------------ | --------- | -------------------------------------------------------------------- |
+| `/`          | Dynamic   | Home page; links to sign in, sign up, or dashboard based on session  |
+| `/signup`    | Dynamic   | Registration form; redirects authenticated users to dashboard        |
+| `/signin`    | Dynamic   | Login form; supports `?registered=1` and `?signedOut=1` query params |
+| `/dashboard` | Protected | Authenticated landing page with welcome message and sign out         |
+
 
 ### Key modules
 
-| Path | Purpose |
-|------|---------|
-| `src/lib/actions/auth-actions.ts` | Server Actions: `signUpAction`, `signInAction`, `signOutAction` |
-| `src/lib/auth/jwt.ts` | JWE token create/verify (`jose`, cookie name `auth_token`) |
-| `src/lib/auth/cookies.ts` | HttpOnly cookie set/clear/read |
-| `src/lib/auth/session.ts` | `getSession`, `requireAuth`, `redirectIfAuthenticated` |
-| `src/lib/services/user-service.ts` | D1 user CRUD and credential verification |
-| `src/lib/validation/auth-schemas.ts` | Zod schemas for sign up and sign in |
-| `src/lib/db.ts` | D1 access via `getCloudflareContext()` with dev fallback |
-| `src/lib/password.ts` | bcrypt hash/verify (10 rounds) |
+
+| Path                                 | Purpose                                                         |
+| ------------------------------------ | --------------------------------------------------------------- |
+| `src/lib/actions/auth-actions.ts`    | Server Actions: `signUpAction`, `signInAction`, `signOutAction` |
+| `src/lib/auth/jwt.ts`                | JWE token create/verify (`jose`, cookie name `auth_token`)      |
+| `src/lib/auth/cookies.ts`            | HttpOnly cookie set/clear/read                                  |
+| `src/lib/auth/session.ts`            | `getSession`, `requireAuth`, `redirectIfAuthenticated`          |
+| `src/lib/services/user-service.ts`   | D1 user CRUD and credential verification                        |
+| `src/lib/validation/auth-schemas.ts` | Zod schemas for sign up and sign in                             |
+| `src/lib/db.ts`                      | D1 access via `getCloudflareContext()` with dev fallback        |
+| `src/lib/password.ts`                | bcrypt hash/verify (10 rounds)                                  |
+
 
 ### Database schema (D1)
 
@@ -842,14 +965,16 @@ CREATE UNIQUE INDEX idx_users_email ON users(email);
 
 ### Deployment
 
-| Item | Value |
-|------|-------|
-| Worker name | `ai-sprints-quizmaker` |
-| Production URL | https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev |
-| Deploy command | `npm run deploy` |
-| Local dev | `npm run dev` (D1 via Wrangler platform proxy fallback) |
-| Local D1 migrations | `npx wrangler d1 migrations apply quizmaker-db --local` |
-| Remote D1 migrations | `npx wrangler d1 migrations apply quizmaker-db --remote` |
+
+| Item                 | Value                                                                                                                              |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Worker name          | `ai-sprints-quizmaker`                                                                                                             |
+| Production URL       | [https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev](https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev) |
+| Deploy command       | `npm run deploy`                                                                                                                   |
+| Local dev            | `npm run dev` (D1 via Wrangler platform proxy fallback)                                                                            |
+| Local D1 migrations  | `npx wrangler d1 migrations apply quizmaker-db --local`                                                                            |
+| Remote D1 migrations | `npx wrangler d1 migrations apply quizmaker-db --remote`                                                                           |
+
 
 ### Dependencies added for auth
 
@@ -866,5 +991,5 @@ CREATE UNIQUE INDEX idx_users_email ON users(email);
 **Sprint:** Sprint 0 — Authentication  
 **Status:** ✅ COMPLETE (implemented and deployed)  
 **Auth mechanism:** Encrypted JWT (JWE) in HttpOnly cookie, 15-minute fixed expiry, no refresh token  
-**Production URL:** https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev  
+**Production URL:** [https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev](https://ai-sprints-quizmaker.rakshitha-quizmaker-rs.workers.dev)  
 **Next Steps:** Begin Sprint 1 — quiz creation and management features per product roadmap

@@ -24,11 +24,11 @@ export function SignUpForm() {
 
 	return (
 		<AuthShell
-			title="Create Account"
+			title="Create account"
 			description="Sign up to start using Quiz Maker."
 			footer={
 				<>
-					Already have an Account? <AuthLink href="/signin">Sign In</AuthLink>
+					Already have an account? <AuthLink href="/signin">Sign In</AuthLink>
 				</>
 			}
 		>
