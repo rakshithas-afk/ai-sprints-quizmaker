@@ -22,6 +22,14 @@ describe("Phase 4 deployment verification", () => {
 		expect(migration).toContain("CREATE UNIQUE INDEX idx_users_email ON users(email)");
 	});
 
+	it("includes the MCQ tables migration required for quiz content", () => {
+		const migration = readFileSync(join(root, "migrations", "0002_create_mcq_tables.sql"), "utf-8");
+
+		expect(migration).toContain("CREATE TABLE mcqs");
+		expect(migration).toContain("CREATE TABLE mcq_choices");
+		expect(migration).toContain("CREATE TABLE mcq_attempts");
+	});
+
 	it("documents JWT_SECRET for local and production setup", () => {
 		const devVarsExample = readFileSync(join(root, ".dev.vars.example"), "utf-8");
 

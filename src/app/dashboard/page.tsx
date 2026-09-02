@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import { SignOutButton } from "@/components/auth/sign-out-button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAuth } from "@/lib/auth/session";
 
@@ -15,11 +18,14 @@ export default async function DashboardPage() {
 					</div>
 					<SignOutButton />
 				</CardHeader>
-				<CardContent>
+				<CardContent className="space-y-4">
 					<p className="text-sm text-muted-foreground">
-						Multiple-choice question and shared test-bank functionality will be implemented in a
-						future sprint.
+						Manage multiple-choice questions in the shared test bank, preview questions, and track
+						your quiz content from one place.
 					</p>
+					<Button nativeButton={false} render={<Link href="/mcqs" />}>
+						Manage MCQs
+					</Button>
 				</CardContent>
 			</Card>
 		</div>
